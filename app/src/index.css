@@ -57,12 +57,15 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-body {
+#root {
   margin: 0;
   padding: 0;
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
 }
 
 .dark {
