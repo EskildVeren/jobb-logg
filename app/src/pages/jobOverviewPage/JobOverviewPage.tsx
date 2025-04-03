@@ -1,4 +1,3 @@
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Table,
   TableBody,
@@ -8,11 +7,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getJobs } from "@/lib/jobData";
+import { getJobs, Job } from "@/lib/jobData";
 import { Link } from "react-router-dom";
+import AppliedForCheckbox from "./components/AppliedForCheckbox";
 
 function JobOverviewPage() {
-  const jobs = getJobs();
+  const jobs: Job[] = getJobs();
   return (
     <>
       <Link to={"/"}>To authentication page</Link>
@@ -22,12 +22,12 @@ function JobOverviewPage() {
           <TableCaption>Jobbliste</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Selskap</TableHead>
+              <TableHead>Selskap</TableHead>
               <TableHead>Stilling</TableHead>
               <TableHead>Søknadsfrist</TableHead>
               <TableHead>Prioritet</TableHead>
               <TableHead>Annonselenke</TableHead>
-              <TableHead className="">Søkt</TableHead>
+              <TableHead>Søkt</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -44,7 +44,7 @@ function JobOverviewPage() {
                 </TableCell>
                 <TableCell>
                   {j.appliedFor}
-                  <Checkbox checked={j.appliedFor} />
+                  <AppliedForCheckbox appliedFor={j.appliedFor} />
                 </TableCell>
               </TableRow>
             ))}
