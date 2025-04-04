@@ -5,6 +5,9 @@ import { createHashRouter, RouterProvider } from "react-router-dom";
 import JobOverviewPage from "./pages/jobOverviewPage/JobOverviewPage.tsx";
 import AuthenticationPage from "./pages/authenticationPage/AuthenticationPage.tsx";
 import { ThemeProvider } from "./components/ui/theme-provider.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const router = createHashRouter([
   {
@@ -19,8 +22,10 @@ const router = createHashRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </QueryClientProvider>
   </StrictMode>
 );
