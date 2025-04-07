@@ -1,0 +1,48 @@
+{
+  "collectionVersion": "httpiness/JSON/0.11",
+  "uuid": "d82548a4-87e2-43a5-9f5d-da8a2466caae",
+  "authChildren": [],
+  "dirChildren": [],
+  "reqtChildren": [
+    {
+      "name": "Create job advert",
+      "rawRequest": {
+        "method": "POST",
+        "url": "${baseUrl}/jobAdverts",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": " application/json"
+          }
+        ],
+        "body": {
+          "type": "Regular",
+          "value": "{\n  \"companyName\": \"Agile Consulting\",\n  \"positionName\": \"Utvikler\",\n  \"deadline\": \"17. mai\",\n  \"priority\": \"High\",\n  \"hyperlink\": \"finn.no/advert\",\n  \"advertisementSite\": \"Finn\",\n  \"city\": \"Trondheim\",\n  \"appliedFor\": false\n}",
+          "valueType": "Text"
+        }
+      }
+    },
+    {
+      "name": "Get job adverts",
+      "rawRequest": {
+        "method": "GET",
+        "url": "${baseUrl}/jobAdverts",
+        "headers": [],
+        "body": null
+      }
+    }
+  ],
+  "parameters": {
+    "baseUrl": "http://localhost:8080"
+  },
+  "parameterPresets": [
+    {
+      "name": "Development",
+      "macros": []
+    },
+    {
+      "name": "Production",
+      "macros": []
+    }
+  ]
+}
