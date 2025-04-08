@@ -6,8 +6,11 @@ import java.util.Collection;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +31,7 @@ public class GreetingController {
 
     // @PostMapping("/jobAdverts", consumes = )
     @PostMapping(value = "/jobAdverts", consumes = { "application/json" })
-    public JobAdvertistement createJobAdvertistement(@RequestBody JobAdvertistement ja) {
+    public void createJobAdvertistement(@RequestBody JobAdvertistement ja) {
         System.out.println(ja);
         try {
             DataAccess.createRow(ja);
@@ -39,7 +42,6 @@ public class GreetingController {
             System.out.println("----------STACK TRACE----------");
             e.printStackTrace();
         }
-        return ja;
     }
 
     @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
@@ -54,6 +56,20 @@ public class GreetingController {
             System.out.println("----------STACK TRACE----------");
             e.printStackTrace();
             return new ArrayList<>();
+        }
+    }
+
+    @PutMapping(value = "/jobAdverts/{advert_id}/appliedFor")
+    public void setAppliedFor(@RequestBody boolean appliedFor, @PathVariable long advert_id) {
+    }
+
+    @DeleteMapping(value = "/jobAdverts/{advert_id}")
+    public void deleteJobAdvertisement(@PathVariable long advert_id) {
+        try {
+            DataAccess.deleteJobAdvert(advert_id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }
