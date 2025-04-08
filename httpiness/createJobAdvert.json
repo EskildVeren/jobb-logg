@@ -30,6 +30,15 @@
         "headers": [],
         "body": null
       }
+    },
+    {
+      "name": "Untitled request",
+      "rawRequest": {
+        "method": "DELETE",
+        "url": "${baseUrl}/jobAdverts/2",
+        "headers": [],
+        "body": null
+      }
     }
   ],
   "parameters": {
