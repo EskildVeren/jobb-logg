@@ -21,8 +21,10 @@ public class DataAccess {
 
     public static void createTable() throws SQLException {
         Connection conn = getConnection();
-        PreparedStatement ps = conn.prepareStatement(
+        Statement st = conn.createStatement();
+        st.execute(
                 "CREATE TABLE IF NOT EXISTS job_adverts (advert_id SERIAL PRIMARY KEY, companyName varchar(225), positionName varchar(225), deadline varchar(225), priority varchar(225), hyperlink varchar(225), advertisementSite varchar(225) , city varchar(225) , appliedFor varchar(225));");
+        st.close();
     }
 
     public static void createRow(JobAdvertistement jobAdvert) throws SQLException {
@@ -80,8 +82,9 @@ public class DataAccess {
 
     public static void main(String[] args) {
         System.out.println("Starting program...");
-        JobAdvertistement j = new JobAdvertistement("Evil Inc.", "Developer", "May", "HIGH",
-                "https://finn.no", "finn", "Trondheim", false);
+        // JobAdvertistement j = new JobAdvertistement("Evil Inc.", "Developer", "May",
+        // "HIGH",
+        // "https://finn.no", "finn", "Trondheim", false);
         // da.createRow(j);
         // getAllJobAdvertisements();
         // da.deleteTable();
