@@ -46,6 +46,7 @@ public class DataAccess {
         // Mapping the resultset to a list of jobAdverts
         List<JobAdvertistement> jobAdverts = new ArrayList<>();
         while (rs.next()) {
+            // System.out.println(rs.getInt(1) + " " + rs.getString(2));
             String companyName = rs.getString("companyName");
             String positionName = rs.getString("positionName");
             String deadline = rs.getString("deadline");
@@ -78,6 +79,12 @@ public class DataAccess {
             System.out.println("FEILMELDING");
             System.out.println(e.getMessage());
         }
+    }
+
+    public static void deleteJobAdvert(long advert_id) throws SQLException {
+        Connection conn = getConnection();
+        conn.createStatement().execute("DELETE FROM job_adverts WHERE advert_id = '" + advert_id + "';");
+        System.out.println("Deleted");
     }
 
     public static void main(String[] args) {
