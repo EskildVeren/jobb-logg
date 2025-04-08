@@ -42,6 +42,7 @@ public class GreetingController {
         return ja;
     }
 
+    @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
     @GetMapping(value = "/jobAdverts")
     public Collection<JobAdvertistement> getAllJobAdverts() {
         try {
