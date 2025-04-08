@@ -1,54 +1,54 @@
-export type Job = {
-  id: string;
+export type JobAdvert = {
+  advert_id: string;
   companyName: string;
   positionName: string;
   deadline: string;
   priority: string;
   hyperlink: string;
-  advertSite: string;
+  advertisementSite: string;
   appliedFor: boolean;
 };
 
-export function getJobs(): Job[] {
+export function getJobs(): JobAdvert[] {
   return [
     {
-      id: "0",
+      advert_id: "0",
       companyName: "Variant",
       positionName: "Webutvikler",
       priority: "Høy",
       deadline: "4. mars",
       hyperlink: "https://jobs.variant.no/o/utvikler-i-oslo",
-      advertSite: "Variant",
+      advertisementSite: "Variant",
       appliedFor: false,
     },
     {
-      id: "1",
+      advert_id: "1",
       companyName: "Bekk",
       positionName: "Frontend utvikler",
       priority: "Medium",
       deadline: "4. mars",
       hyperlink: "https://jobs.variant.no/o/utvikler-i-oslo",
-      advertSite: "Finn",
+      advertisementSite: "Finn",
       appliedFor: true,
     },
     {
-      id: "2",
+      advert_id: "2",
       companyName: "Kantega",
       positionName: "UX",
       priority: "Høy",
       deadline: "4. mars",
       hyperlink: "https://jobs.variant.no/o/utvikler-i-oslo",
-      advertSite: "Finn",
+      advertisementSite: "Finn",
       appliedFor: false,
     },
     {
-      id: "3",
+      advert_id: "3",
       companyName: "NAV",
       positionName: "Backend utvikler",
       priority: "Høy",
       deadline: "4. mars",
       hyperlink: "https://jobs.variant.no/o/utvikler-i-oslo",
-      advertSite: "Abakus",
+      advertisementSite: "Abakus",
       appliedFor: false,
     },
   ];
