@@ -21,6 +21,7 @@ function JobAdvertTable(props: { jobAdverts: JobAdvert[] }) {
           <TableHead>Søknadsfrist</TableHead>
           <TableHead>Prioritet</TableHead>
           <TableHead>Annonselenke</TableHead>
+          <TableHead>By</TableHead>
           <TableHead>Søkt</TableHead>
         </TableRow>
       </TableHeader>
@@ -36,6 +37,7 @@ function JobAdvertTable(props: { jobAdverts: JobAdvert[] }) {
                 {j.advertisementSite}
               </a>
             </TableCell>
+            <TableCell>{j.city}</TableCell>
             <TableCell>
               {j.appliedFor}
               <AppliedForCheckbox appliedFor={j.appliedFor} />
