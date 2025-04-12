@@ -34,6 +34,7 @@ export default function JobForm(props: {
   handleSubmit: SubmitHandler<JobFormInputs>;
 }) {
   const { register, handleSubmit } = useForm<JobFormInputs>();
+
   const onSubmit: SubmitHandler<JobFormInputs> = props.handleSubmit;
   const inputClassName = "flex flex-col gap-y-1";
 
