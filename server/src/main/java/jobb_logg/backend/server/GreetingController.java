@@ -30,11 +30,14 @@ public class GreetingController {
     }
 
     // @PostMapping("/jobAdverts", consumes = )
+    @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
     @PostMapping(value = "/jobAdverts", consumes = { "application/json" })
     public void createJobAdvertistement(@RequestBody JobAdvertistement ja) {
-        System.out.println(ja);
+        System.out.println("Adding job advertisement...");
         try {
             DataAccess.createRow(ja);
+            System.out.println("Job advertisement added!");
+
         } catch (SQLException e) {
             System.out.println("Error while creating new job advert");
             System.out.println("----------ERROR MESSAGE----------");
@@ -63,6 +66,7 @@ public class GreetingController {
     public void setAppliedFor(@RequestBody boolean appliedFor, @PathVariable long advert_id) {
     }
 
+    @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
     @DeleteMapping(value = "/jobAdverts/{advert_id}")
     public void deleteJobAdvertisement(@PathVariable long advert_id) {
         try {
