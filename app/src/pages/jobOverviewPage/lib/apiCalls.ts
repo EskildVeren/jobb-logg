@@ -1,6 +1,8 @@
 import { JobAdvert } from "@/lib/jobData";
 import { JobFormInputs } from "../components/JobForm";
 
+const mode = import.meta.env.MODE;
+
 export async function fetchJobAdverts() {
   const res = await fetch("http://localhost:8080/jobAdverts");
   return await res.json();
