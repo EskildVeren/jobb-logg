@@ -23,7 +23,7 @@ public class DataAccess {
         Connection conn = getConnection();
         Statement st = conn.createStatement();
         st.execute(
-                "CREATE TABLE IF NOT EXISTS job_adverts (advert_id SERIAL PRIMARY KEY, companyName varchar(225), positionName varchar(225), deadline varchar(225), priority varchar(225), hyperlink varchar(225), advertisementSite varchar(225) , city varchar(225) , appliedFor varchar(225));");
+                "CREATE TABLE IF NOT EXISTS job_adverts (advertId SERIAL PRIMARY KEY, companyName varchar(225), positionName varchar(225), deadline varchar(225), priority varchar(225), hyperlink varchar(225), advertisementSite varchar(225) , city varchar(225) , appliedFor varchar(225));");
         st.close();
     }
 
@@ -47,6 +47,7 @@ public class DataAccess {
         List<JobAdvertistement> jobAdverts = new ArrayList<>();
         while (rs.next()) {
             // System.out.println(rs.getInt(1) + " " + rs.getString(2));
+            int id = rs.getInt("advertId");
             String companyName = rs.getString("companyName");
             String positionName = rs.getString("positionName");
             String deadline = rs.getString("deadline");
@@ -56,7 +57,7 @@ public class DataAccess {
             String city = rs.getString("city");
             boolean appliedFor = rs.getBoolean("appliedFor");
 
-            JobAdvertistement ja = new JobAdvertistement(companyName, positionName, deadline, priority, hyperlink,
+            JobAdvertistement ja = new JobAdvertistement(id, companyName, positionName, deadline, priority, hyperlink,
                     advertisementSite, city, appliedFor);
 
             jobAdverts.add(ja);
@@ -74,6 +75,7 @@ public class DataAccess {
             Statement st = conn.createStatement();
             st.execute("DROP TABLE IF EXISTS job_adverts");
             st.close();
+            System.out.println("Table 'job_adverts' deleted");
         } catch (Exception e) {
             System.out.println("Something went wrong while deleting table");
             System.out.println("FEILMELDING");
@@ -81,9 +83,9 @@ public class DataAccess {
         }
     }
 
-    public static void deleteJobAdvert(long advert_id) throws SQLException {
+    public static void deleteJobAdvert(long advertId) throws SQLException {
         Connection conn = getConnection();
-        conn.createStatement().execute("DELETE FROM job_adverts WHERE advert_id = '" + advert_id + "';");
+        conn.createStatement().execute("DELETE FROM job_adverts WHERE advertId = '" + advertId + "';");
         System.out.println("Deleted");
     }
 
@@ -95,5 +97,11 @@ public class DataAccess {
         // da.createRow(j);
         // getAllJobAdvertisements();
         // da.deleteTable();
+        try {
+            DataAccess.createTable();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }

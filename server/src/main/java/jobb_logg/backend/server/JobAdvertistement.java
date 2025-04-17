@@ -3,11 +3,13 @@ package jobb_logg.backend.server;
 import java.io.Serializable;
 
 public class JobAdvertistement implements Serializable {
+    private final int advertId;
     private String companyName, positionName, deadline, priority, hyperlink, advertisementSite, city;
     private boolean appliedFor;
 
-    public JobAdvertistement(String companyName, String positionName, String deadline, String priority,
+    public JobAdvertistement(int advertId, String companyName, String positionName, String deadline, String priority,
             String hyperlink, String advertisementSite, String city, boolean appliedFor) {
+        this.advertId = advertId;
         this.companyName = companyName;
         this.positionName = positionName;
         this.deadline = deadline;
@@ -21,8 +23,9 @@ public class JobAdvertistement implements Serializable {
     @Override
     public String toString() {
         return String.format(
-                "JobAdvertistement[companyName='%s', positionName='%s', deadline='%s', priority='%s', hyperlink='%s', advertisementSite='%s', city='%s', appliedFor='%s']",
-                companyName, positionName, deadline, priority, hyperlink, advertisementSite, city, appliedFor);
+                "JobAdvertistement[advertId='%d', companyName='%s', positionName='%s', deadline='%s', priority='%s', hyperlink='%s', advertisementSite='%s', city='%s', appliedFor='%s']",
+                advertId, companyName, positionName, deadline, priority, hyperlink, advertisementSite, city,
+                appliedFor);
     }
 
     public String getSqlValues() {
@@ -39,6 +42,10 @@ public class JobAdvertistement implements Serializable {
 
         return subStatement;
         // return "('Pusemann', 'Pusemann123')";
+    }
+
+    public int getAdvertId() {
+        return advertId;
     }
 
     public String getCompanyName() {
@@ -106,7 +113,7 @@ public class JobAdvertistement implements Serializable {
     }
 
     public static void main(String[] args) {
-        JobAdvertistement j = new JobAdvertistement(null, null, null, null, null, null, null, false);
+        JobAdvertistement j = new JobAdvertistement(0, null, null, null, null, null, null, null, false);
         System.out.println(j.getSqlValues());
     }
 

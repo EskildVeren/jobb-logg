@@ -62,15 +62,15 @@ public class GreetingController {
         }
     }
 
-    @PutMapping(value = "/jobAdverts/{advert_id}/appliedFor")
-    public void setAppliedFor(@RequestBody boolean appliedFor, @PathVariable long advert_id) {
+    @PutMapping(value = "/jobAdverts/{advertId}/appliedFor")
+    public void setAppliedFor(@RequestBody boolean appliedFor, @PathVariable long advertId) {
     }
 
     @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
-    @DeleteMapping(value = "/jobAdverts/{advert_id}")
-    public void deleteJobAdvertisement(@PathVariable long advert_id) {
+    @DeleteMapping(value = "/jobAdverts/{advertId}")
+    public void deleteJobAdvertisement(@PathVariable long advertId) {
         try {
-            DataAccess.deleteJobAdvert(advert_id);
+            DataAccess.deleteJobAdvert(advertId);
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
