@@ -1,12 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from "@/components/ui/popover";
+
 import {
   Select,
   SelectContent,
@@ -16,9 +11,9 @@ import {
   SelectValue,
   SelectLabel,
 } from "@/components/ui/select";
-import { CalendarIcon } from "lucide-react";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import CalenderInput from "./CalenderInput";
 
 export type JobFormInputs = {
   companyName: string;
@@ -33,7 +28,7 @@ export type JobFormInputs = {
 export default function JobForm(props: {
   handleSubmit: SubmitHandler<JobFormInputs>;
 }) {
-  const { register, handleSubmit } = useForm<JobFormInputs>();
+  const { control, register, handleSubmit } = useForm<JobFormInputs>();
 
   const onSubmit: SubmitHandler<JobFormInputs> = props.handleSubmit;
   const inputClassName = "flex flex-col gap-y-1";
@@ -52,27 +47,7 @@ export default function JobForm(props: {
         <Input id="stillingsnavn" {...register("positionName")} />
       </span>
       <span className={`${inputClassName}`}>
-        <Label htmlFor="søknadsfrist">Søknadsfrist</Label>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant={"outline"}
-              className={"pl-3 text-left font-normal text-muted-foreground"}
-            >
-              <span>Pick a date</span>
-              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <Calendar
-              mode="single"
-              disabled={(date) =>
-                date > new Date() || date < new Date("1900-01-01")
-              }
-              initialFocus
-            />
-          </PopoverContent>
-        </Popover>
+        <CalenderInput control={control} />
       </span>
       <span className={`${inputClassName}`}>
         <Label htmlFor="søknadsprioritet">Søknadsprioritet</Label>
