@@ -1,5 +1,5 @@
 export type JobAdvert = {
-  advert_id: string;
+  advertId: string;
   companyName: string;
   positionName: string;
   deadline: string;

@@ -25,9 +25,9 @@ function JobAdvertTable(props: { jobAdverts: JobAdvert[] }) {
           <TableHead>Søkt</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody id="Frode">
+      <TableBody>
         {props.jobAdverts.map((j) => (
-          <TableRow id={j.advert_id}>
+          <TableRow key={j.advert_id}>
             <TableCell>{j.companyName}</TableCell>
             <TableCell>{j.positionName}</TableCell>
             <TableCell>{j.deadline}</TableCell>
