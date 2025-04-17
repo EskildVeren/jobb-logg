@@ -27,7 +27,6 @@ function JobOverviewPage() {
         {isLoading && "Loading jobs..."}
         {error && error.message}
         {data && <JobAdvertTable jobAdverts={data} />}
-        {data && console.log(data)}
       </div>
     </>
   );
