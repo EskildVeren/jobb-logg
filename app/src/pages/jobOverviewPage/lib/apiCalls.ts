@@ -19,7 +19,7 @@ export async function createJobAdvert(newJobAdvert: JobFormInputs) {
   return res;
 }
 export async function deleteJobAdvert(jobAdvert: JobAdvert) {
-  const id = jobAdvert.advert_id;
+  const id = jobAdvert.advertId;
   const res = await fetch(`http://localhost:8080/jobAdverts/${id}`, {
     method: "DELETE",
   });
