@@ -43,7 +43,7 @@ function JobAdvertTable(props: { jobAdverts: JobAdvert[] }) {
             <TableCell>{j.city}</TableCell>
             <TableCell>
               {j.appliedFor}
-              <AppliedForCheckbox appliedFor={j.appliedFor} />
+              <AppliedForCheckbox jobAdvert={j} />
             </TableCell>
             <TableCell>
               <Trash2Icon
@@ -60,11 +60,20 @@ function JobAdvertTable(props: { jobAdverts: JobAdvert[] }) {
 }
 
 function getFormattedDate(dateString: string) {
-  const date = new Date(dateString);
-  const year = new Intl.DateTimeFormat("no", { year: "numeric" }).format(date);
-  const month = new Intl.DateTimeFormat("no", { month: "short" }).format(date);
-  const day = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(date); // Use en, no is bugged
-  return `${day}-${month}-${year}`;
+  try {
+    const date = new Date(dateString);
+    const year = new Intl.DateTimeFormat("no", { year: "numeric" }).format(
+      date
+    );
+    const month = new Intl.DateTimeFormat("no", { month: "short" }).format(
+      date
+    );
+    const day = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(date); // Use en, no is bugged
+    return `${day}-${month}-${year}`;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e) {
+    return "";
+  }
 }
 
 export default JobAdvertTable;

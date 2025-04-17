@@ -29,7 +29,6 @@ public class GreetingController {
 
     }
 
-    // @PostMapping("/jobAdverts", consumes = )
     @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
     @PostMapping(value = "/jobAdverts", consumes = { "application/json" })
     public void createJobAdvertistement(@RequestBody JobAdvertistement ja) {
@@ -62,8 +61,14 @@ public class GreetingController {
         }
     }
 
-    @PutMapping(value = "/jobAdverts/{advertId}/appliedFor")
-    public void setAppliedFor(@RequestBody boolean appliedFor, @PathVariable long advertId) {
+    @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
+    @PutMapping(value = "/jobAdverts/{advertId}/appliedFor", consumes = { "application/json" })
+    public void setAppliedFor(@PathVariable long advertId, @RequestBody boolean appliedFor) {
+        try {
+            DataAccess.setAppliedFor(advertId, appliedFor);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")

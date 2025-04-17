@@ -39,7 +39,6 @@ export default function CalenderInput(props: {
                 selected={new Date(field.value)}
                 onSelect={(date) => {
                   field.onChange(date);
-                  console.log(field.value);
                 }}
                 initialFocus
               />

@@ -23,8 +23,22 @@ public class DataAccess {
         Connection conn = getConnection();
         Statement st = conn.createStatement();
         st.execute(
-                "CREATE TABLE IF NOT EXISTS job_adverts (advertId SERIAL PRIMARY KEY, companyName varchar(225), positionName varchar(225), deadline varchar(225), priority varchar(225), hyperlink varchar(225), advertisementSite varchar(225) , city varchar(225) , appliedFor varchar(225));");
+                "CREATE TABLE IF NOT EXISTS job_adverts (advertId SERIAL PRIMARY KEY, companyName varchar(225), positionName varchar(225), deadline varchar(225), priority varchar(225), hyperlink varchar(225), advertisementSite varchar(225) , city varchar(225) , appliedFor boolean);");
         st.close();
+    }
+
+    public static void deleteTable() {
+        try {
+            Connection conn = getConnection();
+            Statement st = conn.createStatement();
+            st.execute("DROP TABLE IF EXISTS job_adverts");
+            st.close();
+            System.out.println("Table 'job_adverts' deleted");
+        } catch (Exception e) {
+            System.out.println("Something went wrong while deleting table");
+            System.out.println("FEILMELDING");
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void createRow(JobAdvertistement jobAdvert) throws SQLException {
@@ -69,38 +83,34 @@ public class DataAccess {
         return jobAdverts;
     }
 
-    public static void deleteTable() {
-        try {
-            Connection conn = getConnection();
-            Statement st = conn.createStatement();
-            st.execute("DROP TABLE IF EXISTS job_adverts");
-            st.close();
-            System.out.println("Table 'job_adverts' deleted");
-        } catch (Exception e) {
-            System.out.println("Something went wrong while deleting table");
-            System.out.println("FEILMELDING");
-            System.out.println(e.getMessage());
-        }
-    }
-
     public static void deleteJobAdvert(long advertId) throws SQLException {
         Connection conn = getConnection();
         conn.createStatement().execute("DELETE FROM job_adverts WHERE advertId = '" + advertId + "';");
         System.out.println("Deleted");
     }
 
+    public static void setAppliedFor(long advertId, Boolean appliedFor) throws SQLException {
+        Connection conn = getConnection();
+        conn.createStatement()
+                .execute(String.format("UPDATE job_adverts SET appliedFor=%s WHERE advertId=%d;",
+                        Boolean.toString(appliedFor), advertId));
+    }
+
     public static void main(String[] args) {
         System.out.println("Starting program...");
-        // JobAdvertistement j = new JobAdvertistement("Evil Inc.", "Developer", "May",
-        // "HIGH",
-        // "https://finn.no", "finn", "Trondheim", false);
-        // da.createRow(j);
+
         // getAllJobAdvertisements();
         // da.deleteTable();
         try {
-            DataAccess.createTable();
+            // deleteTable();
+            // createTable();
+            // JobAdvertistement j = new JobAdvertistement(11, "Evil Inc.", "Developer",
+            // "May",
+            // "HIGH",
+            // "https://finn.no", "finn", "Trondheim", false);
+            // createRow(j);
+            setAppliedFor(1, true);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
