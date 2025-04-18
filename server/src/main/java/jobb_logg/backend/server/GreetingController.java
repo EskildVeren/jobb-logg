@@ -1,10 +1,14 @@
 package jobb_logg.backend.server;
 
+import java.lang.annotation.Annotation;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,11 +36,18 @@ public class GreetingController {
 
     @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
     @PostMapping(value = "/jobAdverts", consumes = { "application/json" })
-    public void createJobAdvertistement(@RequestBody JobAdvertistement ja) {
+    @ResponseBody()
+    public Collection<JobAdvertistement> createJobAdvertistement(@RequestBody JobAdvertistement ja) {
         System.out.println("Adding job advertisement...");
         try {
             DataAccess.createRow(ja);
             System.out.println("Job advertisement added!");
+
+            List<JobAdvertistement> res = new ArrayList<>();
+            res.add(ja);
+
+            // Any way to optimize this? Only return created jobAdvertisement?
+            return DataAccess.getAllJobAdvertisements();
 
         } catch (SQLException e) {
             System.out.println("Error while creating new job advert");
@@ -43,6 +55,7 @@ public class GreetingController {
             System.out.println(e.getMessage());
             System.out.println("----------STACK TRACE----------");
             e.printStackTrace();
+            return null;
         }
     }
 
