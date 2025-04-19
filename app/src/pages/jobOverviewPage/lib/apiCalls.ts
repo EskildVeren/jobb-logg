@@ -22,7 +22,7 @@ export async function deleteJobAdvert(jobAdvert: JobAdvert) {
   const res = await fetch(`http://localhost:8080/jobAdverts/${id}`, {
     method: "DELETE",
   });
-  return res;
+  return res.json();
 }
 
 export async function setAppliedFor(jobAdvertId: number, appliedFor: boolean) {
@@ -36,5 +36,5 @@ export async function setAppliedFor(jobAdvertId: number, appliedFor: boolean) {
       },
     }
   );
-  return res;
+  return res.json();
 }
