@@ -21,7 +21,7 @@ export type JobFormInputs = {
   deadline: string;
   priority: string;
   hyperlink: string;
-  advertSite: string;
+  advertisementSite: string;
   city: string;
 };
 
@@ -71,7 +71,7 @@ export default function JobForm(props: {
       </span>
       <span className={`${inputClassName}`}>
         <Label htmlFor="annonsenettsted">Annonsenettsted</Label>
-        <Input id="annonsenettsted" {...register("advertSite")} />
+        <Input id="annonsenettsted" {...register("advertisementSite")} />
       </span>
       <span className={`${inputClassName}`}>
         <Label htmlFor="by">By</Label>
