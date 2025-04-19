@@ -1,22 +1,32 @@
 import { Checkbox } from "@/components/ui/checkbox";
-import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
+import {
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { setAppliedFor } from "../lib/apiCalls";
 import { JobAdvert } from "@/lib/jobData";
 
-function AppliedForCheckbox(props: { jobAdvert: JobAdvert }) {
-  const [checked, setChecked] = useState(props.jobAdvert.appliedFor);
+function AppliedForCheckbox(props: {
+  jobAdvert: JobAdvert;
+  queryClient: QueryClient;
+}) {
+  //const [checked, setChecked] = useState(props.jobAdvert.appliedFor);
+  const queryClient = useQueryClient();
+
   const mutation = useMutation({
-    mutationFn: (bol: boolean) =>
-      setAppliedFor(Number(props.jobAdvert.advertId), bol),
+    mutationFn: setAppliedFor,
+    onSuccess: (data) => queryClient.setQueryData(["repoData"], data),
   });
   const handleAppliedFor = () => {
-    mutation.mutate(!checked);
-    setChecked(!checked);
+    mutation.mutate({
+      jobAdvertId: Number(props.jobAdvert.advertId),
+      appliedFor: !props.jobAdvert.appliedFor,
+    });
   };
 
   return (
-    <Checkbox onClick={handleAppliedFor} checked={checked}>
+    <Checkbox onClick={handleAppliedFor} checked={props.jobAdvert.appliedFor}>
       AppliedForCheckbox
     </Checkbox>
   );

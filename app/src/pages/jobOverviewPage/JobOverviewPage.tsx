@@ -29,7 +29,7 @@ function JobOverviewPage() {
       <div className="w-1/2">
         {isLoading && "Loading jobs..."}
         {error && error.message}
-        {data && <JobAdvertTable jobAdverts={data} queryClient={queryClient} />}
+        {data && <JobAdvertTable jobAdverts={data} />}
       </div>
     </>
   );

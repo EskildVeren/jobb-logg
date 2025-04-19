@@ -62,6 +62,7 @@ public class GreetingController {
     public Collection<JobAdvertistement> setAppliedFor(@PathVariable long advertId, @RequestBody boolean appliedFor) {
         try {
             DataAccess.setAppliedFor(advertId, appliedFor);
+            System.out.println("Edited the applied for status of job advert " + advertId);
             return DataAccess.getAllJobAdvertisements();
         } catch (SQLException e) {
             e.printStackTrace();
