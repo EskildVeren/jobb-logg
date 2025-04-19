@@ -11,6 +11,7 @@ import { JobAdvert } from "@/lib/jobData";
 import AppliedForCheckbox from "./AppliedForCheckbox";
 import { Trash2Icon } from "lucide-react";
 import { deleteJobAdvert } from "../lib/apiCalls";
+import { getFormattedDate } from "../lib/formatDate";
 
 function JobAdvertTable(props: { jobAdverts: JobAdvert[] }) {
   return (
@@ -57,23 +58,6 @@ function JobAdvertTable(props: { jobAdverts: JobAdvert[] }) {
       </TableBody>
     </Table>
   );
-}
-
-function getFormattedDate(dateString: string) {
-  try {
-    const date = new Date(dateString);
-    const year = new Intl.DateTimeFormat("no", { year: "numeric" }).format(
-      date
-    );
-    const month = new Intl.DateTimeFormat("no", { month: "short" }).format(
-      date
-    );
-    const day = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(date); // Use en, no is bugged
-    return `${day}-${month}-${year}`;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (e) {
-    return "";
-  }
 }
 
 export default JobAdvertTable;
