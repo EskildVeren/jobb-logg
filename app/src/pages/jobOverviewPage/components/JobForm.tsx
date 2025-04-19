@@ -28,7 +28,7 @@ export type JobFormInputs = {
 export default function JobForm(props: {
   handleSubmit: SubmitHandler<JobFormInputs>;
 }) {
-  const { control, register, handleSubmit } = useForm<JobFormInputs>();
+  const { control, register, handleSubmit, watch } = useForm<JobFormInputs>();
 
   const onSubmit: SubmitHandler<JobFormInputs> = props.handleSubmit;
   const inputClassName = "flex flex-col gap-y-1";
@@ -47,7 +47,7 @@ export default function JobForm(props: {
         <Input id="stillingsnavn" {...register("positionName")} />
       </span>
       <span className={`${inputClassName}`}>
-        <CalenderInput control={control} />
+        <CalenderInput control={control} watch={watch} />
       </span>
       <span className={`${inputClassName}`}>
         <Label htmlFor="søknadsprioritet">Søknadsprioritet</Label>

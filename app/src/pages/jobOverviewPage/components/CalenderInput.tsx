@@ -7,11 +7,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
-import { Control, Controller } from "react-hook-form";
+import { Control, Controller, UseFormWatch } from "react-hook-form";
 import { JobFormInputs } from "./JobForm";
+import { getFormattedDate } from "../lib/formatDate";
 
 export default function CalenderInput(props: {
   control: Control<JobFormInputs, unknown, JobFormInputs>;
+  watch: UseFormWatch<JobFormInputs>;
 }) {
   return (
     <>
@@ -22,7 +24,11 @@ export default function CalenderInput(props: {
             variant={"outline"}
             className={"pl-3 text-left font-normal text-muted-foreground"}
           >
-            <span>Pick a date</span>
+            <span>
+              {props.watch("deadline")
+                ? getFormattedDate(props.watch("deadline"))
+                : "Pick a date"}
+            </span>
             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
           </Button>
         </PopoverTrigger>
