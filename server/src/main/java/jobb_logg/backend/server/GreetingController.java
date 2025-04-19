@@ -59,22 +59,26 @@ public class GreetingController {
 
     @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
     @PutMapping(value = "/jobAdverts/{advertId}/appliedFor", consumes = { "application/json" })
-    public void setAppliedFor(@PathVariable long advertId, @RequestBody boolean appliedFor) {
+    public Collection<JobAdvertistement> setAppliedFor(@PathVariable long advertId, @RequestBody boolean appliedFor) {
         try {
             DataAccess.setAppliedFor(advertId, appliedFor);
+            return DataAccess.getAllJobAdvertisements();
         } catch (SQLException e) {
             e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 
     @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
     @DeleteMapping(value = "/jobAdverts/{advertId}")
-    public void deleteJobAdvertisement(@PathVariable long advertId) {
+    public Collection<JobAdvertistement> deleteJobAdvertisement(@PathVariable long advertId) {
         try {
             DataAccess.deleteJobAdvert(advertId);
+            return DataAccess.getAllJobAdvertisements();
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
+            return new ArrayList<>();
         }
     }
 }
