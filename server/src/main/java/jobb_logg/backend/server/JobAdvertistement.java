@@ -41,7 +41,6 @@ public class JobAdvertistement implements Serializable {
         subStatement = subStatement.concat(")");
 
         return subStatement;
-        // return "('Pusemann', 'Pusemann123')";
     }
 
     public int getAdvertId() {
@@ -111,10 +110,4 @@ public class JobAdvertistement implements Serializable {
     public void setAppliedFor(boolean appliedFor) {
         this.appliedFor = appliedFor;
     }
-
-    public static void main(String[] args) {
-        JobAdvertistement j = new JobAdvertistement(0, null, null, null, null, null, null, null, false);
-        System.out.println(j.getSqlValues());
-    }
-
 }
