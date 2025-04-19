@@ -15,9 +15,7 @@ function JobOverviewPage() {
 
   const mutation = useMutation({
     mutationFn: createJobAdvert,
-    onSuccess: (data) => {
-      queryClient.setQueryData(["repoData"], data);
-    },
+    onSuccess: (data) => queryClient.setQueryData(["repoData"], data),
   });
 
   const handleSubmit: SubmitHandler<JobFormInputs> = (formInput) =>
