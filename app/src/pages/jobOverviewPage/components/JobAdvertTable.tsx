@@ -12,8 +12,17 @@ import AppliedForCheckbox from "./AppliedForCheckbox";
 import { Trash2Icon } from "lucide-react";
 import { deleteJobAdvert } from "../lib/apiCalls";
 import { getFormattedDate } from "../lib/formatDate";
+import { QueryClient, useMutation } from "@tanstack/react-query";
 
-function JobAdvertTable(props: { jobAdverts: JobAdvert[] }) {
+function JobAdvertTable(props: {
+  jobAdverts: JobAdvert[];
+  queryClient: QueryClient;
+}) {
+  const deleteJobAdvertMutation = useMutation({
+    mutationFn: deleteJobAdvert,
+    onSuccess: (data) => props.queryClient.setQueryData(["repoData"], data),
+  });
+
   return (
     <Table>
       <TableCaption>Jobbliste</TableCaption>
@@ -48,7 +57,7 @@ function JobAdvertTable(props: { jobAdverts: JobAdvert[] }) {
             </TableCell>
             <TableCell>
               <Trash2Icon
-                onClick={() => deleteJobAdvert(j)}
+                onClick={() => deleteJobAdvertMutation.mutate(j)}
                 className="cursor-pointer"
                 color="tomato"
               />
