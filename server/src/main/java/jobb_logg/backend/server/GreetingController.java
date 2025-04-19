@@ -1,14 +1,10 @@
 package jobb_logg.backend.server;
 
-import java.lang.annotation.Annotation;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,23 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class GreetingController {
-
-    private static final String template = "Hello, %s";
-    private final AtomicLong counter = new AtomicLong();
-
-    @CrossOrigin(origins = "http://localhost:5173")
-    @GetMapping("/greeting")
-    public Greeting greeting(@RequestParam(value = "name", defaultValue = "Boo") String name) {
-        System.out.println("Getting visit " + counter);
-        return new Greeting(counter.incrementAndGet(), String.format(template, name));
-
-    }
 
     @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
     @PostMapping(value = "/jobAdverts", consumes = { "application/json" })
@@ -46,7 +30,6 @@ public class GreetingController {
             List<JobAdvertistement> res = new ArrayList<>();
             res.add(ja);
 
-            // Any way to optimize this? Only return created jobAdvertisement?
             return DataAccess.getAllJobAdvertisements();
 
         } catch (SQLException e) {
